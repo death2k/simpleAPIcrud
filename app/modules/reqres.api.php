@@ -1,12 +1,11 @@
 <?php
 
 // 3 parametros para acessar e consumir a api
-function callAPI($method, $url, $data){
+function pullAPI($param1, $uri, $data){
 
 //iniciar o curl
     $curl = curl_init();
-
-    switch ($method) {
+    switch ($param1) {
         case 'POST':
             curl_setopt($curl, CURLOPT_POST, 1);
             if($data)
@@ -20,12 +19,12 @@ function callAPI($method, $url, $data){
         
         default:
             if($data)
-                $url = sprintf("%s?%s", $url, http_build_query($data));
+                $uri = sprintf("%s?%s", $uri, http_build_query($data));
         break;
     }
 
     //
-   curl_setopt($curl, CURLOPT_URL, $url);
+   curl_setopt($curl, CURLOPT_URL, $uri);
    curl_setopt($curl, CURLOPT_HTTPHEADER, array(
       'APIKEY: 111111111111111111111',
       'Content-Type: application/json',
